@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String
 from app.dependencies.db.models import Base, USERS_TABLE_NAME
+from sqlalchemy import Column, Integer, String
 
 
 class User(Base):

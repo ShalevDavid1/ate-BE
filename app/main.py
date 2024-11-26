@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from fastapi import FastAPI, HTTPException
-from app.routes import restaurant
+from app.routes import restaurant, user
 
 app = FastAPI()
 
@@ -15,6 +15,7 @@ def health_check():
 
 
 app.include_router(restaurant.router, prefix="/restaurants", tags=["Restaurants"])
+app.include_router(user.router, prefix="/users", tags=["Users"])
 
 if __name__ == "__main__":
     import uvicorn

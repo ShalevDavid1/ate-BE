@@ -1,5 +1,5 @@
-from sqlalchemy.orm import Session
 from app.dependencies.db.models.restaurant import Restaurant
+from sqlalchemy.orm import Session
 
 
 def get_restaurants(db: Session, skip: int = 0, limit: int = None):
