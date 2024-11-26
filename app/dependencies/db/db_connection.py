@@ -25,3 +25,11 @@ class DatabaseConnection:
             # Create session factory the first time
             cls._SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=cls.get_engine())
         return cls._SessionLocal()
+
+    @classmethod
+    def get_db(cls):
+        db = cls.get_session()
+        try:
+            yield db
+        finally:
+            db.close()
