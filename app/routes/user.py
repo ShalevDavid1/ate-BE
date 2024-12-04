@@ -1,6 +1,5 @@
 from app.dependencies.db.db_connection import DatabaseConnection
 from fastapi import APIRouter, HTTPException, Depends
-from app.dependencies.db.models.user import User
 from app.crud.user import create_user, get_user
 from app.schemas.user import UserCreate
 from sqlalchemy.orm import Session

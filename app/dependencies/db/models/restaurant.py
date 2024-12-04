@@ -10,4 +10,4 @@ class Restaurant(Base):
     formatted_address = Column(String)
     lat = Column(Float, index=True)
     lng = Column(Float, index=True)
-    icon = Column(String)
+    icon = Column(String, nullable=True)

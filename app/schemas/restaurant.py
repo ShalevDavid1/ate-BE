@@ -1,4 +1,6 @@
+from app.schemas.rating import RestaurantRatingOptions, Rating
 from pydantic import BaseModel
+from typing import Optional
 
 
 class RestaurantBase(BaseModel):
@@ -6,11 +8,11 @@ class RestaurantBase(BaseModel):
     formatted_address: str
     lat: float
     lng: float
-    icon: str
+    icon: Optional[str] = None
 
 
-class RestaurantCreate(RestaurantBase):
-    pass
+class RatedRestaurantCreate(RestaurantBase):
+    rating: RestaurantRatingOptions
 
 
 class Restaurant(RestaurantBase):
@@ -18,3 +20,7 @@ class Restaurant(RestaurantBase):
 
     class Config:
         orm_mode = True
+
+
+class RatedRestaurant(Restaurant):
+    rating: RestaurantRatingOptions
