@@ -9,17 +9,20 @@ router = APIRouter()
 
 
 @router.get("/", response_model=list[RatedRestaurant])
-def get_restaurants_route(email: str, skip: int = 0, limit: int = None,
+def get_restaurants_route(email: str = "", user_id: int = 0, skip: int = 0, limit: int = None,
                           db: Session = Depends(DatabaseConnection.get_db)):
     """
+    The function can get email or user_id and returns all of user rated restaurants
     Get a list of all restaurants.
     Supports pagination using `skip` and `limit`.
     """
-    user = get_user(db, email)
-    if user is None:
-        raise HTTPException(status_code=400, detail="Email is not registered")
+    if user_id == 0:
+        user = get_user(db, email)
+        if user is None:
+            raise HTTPException(status_code=400, detail="Email is not registered")
+        user_id = user.id
 
-    restaurants = get_restaurants(db, user.id, skip=skip, limit=limit)
+    restaurants = get_restaurants(db, user_id, skip=skip, limit=limit)
     formatted_restaurants = [
         {
             "id": restaurant.id,

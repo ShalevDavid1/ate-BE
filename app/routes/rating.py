@@ -1,5 +1,4 @@
 from app.crud.rating import delete_ratings_by_restaurant_id
-from app.crud.restaurant import get_restaurants
 from app.dependencies.db.db_connection import DatabaseConnection
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
