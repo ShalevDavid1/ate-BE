@@ -18,3 +18,13 @@ def add_user(user: UserCreate, db: Session = Depends(DatabaseConnection.get_db))
     new_user = create_user(db, user.username, user.email)
 
     return {"id": new_user.id, "username": new_user.username, "email": new_user.email}
+
+
+@router.post("/add_user_if_not_exists", status_code=201)
+def add_user_if_not_exists_route(user: UserCreate, db: Session = Depends(DatabaseConnection.get_db)):
+    # Check if the user already exists
+    new_user = get_user(db, user.email)
+    if new_user is None:
+        # Create a new user object
+        new_user = create_user(db, user.username, user.email)
+    return {"id": new_user.id, "username": new_user.username, "email": new_user.email}
